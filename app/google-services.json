@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3877781934",
+    "project_id": "local-market-bagroot",
+    "storage_bucket": "local-market-bagroot.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3877781934:android:51b281db3a6ae498a0c83f",
+        "android_client_info": {
+          "package_name": "com.example.localmarketbagroot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuY8RZAAsSgk_sOQm7CyCWfEA5iFBnK5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
