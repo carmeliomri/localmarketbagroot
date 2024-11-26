@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                                 name.setText(auth.getCurrentUser().getDisplayName());
                                 mail.setText(auth.getCurrentUser().getEmail());
                                 Toast.makeText(MainActivity.this, "Signed In Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this,CustomerActivity.class);
+                                intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(MainActivity.this, "Failed to sign in: "+ task.getException(), Toast.LENGTH_SHORT).show();
                             }
@@ -71,13 +74,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        /* ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });*/
         FirebaseApp.initializeApp(this);
         imageView = findViewById(R.id.profileImage);
         name = findViewById(R.id.nameTV);
