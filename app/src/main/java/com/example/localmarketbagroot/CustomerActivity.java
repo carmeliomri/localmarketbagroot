@@ -37,18 +37,50 @@ public class CustomerActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myFunction(); // Call your function here
+                Intent intent = new Intent(CustomerActivity.this,SellerActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+        });
+
+        Button dairyButton = findViewById(R.id.dairy);
+        dairyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerActivity.this,DairyActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+        });
+        Button fruitsAndVegtablesButton = findViewById(R.id.fruitsandvegetables);
+        fruitsAndVegtablesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerActivity.this,FruitsandVegetablesActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+        });
+        Button miscButton = findViewById(R.id.misc);
+        miscButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerActivity.this,MiscActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+        });
+        Button sweetsButton = findViewById(R.id.sweets);
+        sweetsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerActivity.this,SweetsActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
             }
         });
     }
 
 
-
-    // Example function
-    private void myFunction() {
-        Intent intent = new Intent(CustomerActivity.this,SellerActivity.class);
-        intent.putExtra("USERNAME",username);
-        startActivity(intent);
-    }
 
 }

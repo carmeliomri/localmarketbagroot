@@ -13,6 +13,18 @@
         android:theme="@style/Theme.LocalMarketBagroot"
         tools:targetApi="31">
         <activity
+            android:name=".MiscActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SweetsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DairyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FruitsandVegetablesActivity"
+            android:exported="false" />
+        <activity
             android:name=".SellerActivity"
             android:exported="false" />
         <activity
