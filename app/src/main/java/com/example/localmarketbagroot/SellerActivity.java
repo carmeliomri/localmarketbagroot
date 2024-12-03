@@ -54,6 +54,7 @@ public class SellerActivity extends AppCompatActivity {
         items.add("Item 1");
         items.add("Item 2");
         items.add("Item 3");
+        items.add("Item 4");
 
 // Set the adapter to the RecyclerView.
         MyAdapter adapter = new MyAdapter(items);
