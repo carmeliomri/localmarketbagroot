@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SellerActivity extends AppCompatActivity {
+public class SellerActivity extends AppCompatActivity implements ImageAdapter.OnImageClickListener {
     RecyclerView recyclerView;
     ImageAdapter imageAdapter;
     List<String> imageUrls;
@@ -48,24 +48,24 @@ public class SellerActivity extends AppCompatActivity {
                 Toast.makeText(SellerActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
             }
         });
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        // recyclerView = findViewById(R.id.recyclerView);
 
 // Set up how the list should look (e.g., vertically).
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 // Create some data for the list.
-        List<String> items = new ArrayList<>();
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
+      //  List<String> items = new ArrayList<>();
+       // items.add("Item 1");
+        //items.add("Item 2");
+        //items.add("Item 3");
+        //items.add("Item 4");
 
 // Set the adapter to the RecyclerView.
-        MyAdapter adapter = new MyAdapter(items);
-        recyclerView.setAdapter(adapter);
+        //MyAdapter adapter = new MyAdapter(items);
+        //recyclerView.setAdapter(adapter);
 
         // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Dummy list of image URLs (replace with real URLs or resources)
@@ -74,11 +74,18 @@ public class SellerActivity extends AppCompatActivity {
         imageUrls.add("https://pettownsendvet.com/wp-content/uploads/2023/01/iStock-1052880600.jpg");
         imageUrls.add("https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=67773a9d419786091c958b2ad08eae5e");
 
-        // Initialize Adapter and set it to RecyclerView
-        imageAdapter = new ImageAdapter(this, imageUrls);
+        // Initialize Adapter with Click Listener
+        imageAdapter = new ImageAdapter(this, imageUrls, this);
         recyclerView.setAdapter(imageAdapter);
+    }
+    @Override
+    public void onImageClick(int position) {
+        String imageUrl = imageUrls.get(position);
+        Toast.makeText(this, "Image clicked: " + position + " - " + imageUrl, Toast.LENGTH_SHORT).show();
 
-
-
+        // Example: Navigate to another activity or perform any action
+        // Intent intent = new Intent(this, DetailActivity.class);
+        // intent.putExtra("image_url", imageUrl);
+        // startActivity(intent);
     }
 }
