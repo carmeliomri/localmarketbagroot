@@ -81,7 +81,10 @@ public class SellerActivity extends AppCompatActivity implements ImageAdapter.On
     @Override
     public void onImageClick(int position) {
         String imageUrl = imageUrls.get(position);
-        Toast.makeText(this, "Image clicked: " + position + " - " + imageUrl, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SellerActivity.this,SellerUpdateItem.class);
+        intent.putExtra("URL",imageUrl);
+        intent.putExtra("POSITION",position);
+        startActivity(intent);
 
         // Example: Navigate to another activity or perform any action
         // Intent intent = new Intent(this, DetailActivity.class);
