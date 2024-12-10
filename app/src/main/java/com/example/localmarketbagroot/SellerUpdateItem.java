@@ -26,9 +26,6 @@ public class SellerUpdateItem extends AppCompatActivity {
             // Reference to the ImageView
             ImageView imageView = findViewById(R.id.imageView);
 
-            // URL of the image to load
-            String imageUrl = "https://via.placeholder.com/600";
-
             // Use Glide to load the image into the ImageView
             Glide.with(this)
                     .load(this.getIntent().getExtras().getString("URL")) // The image URL
