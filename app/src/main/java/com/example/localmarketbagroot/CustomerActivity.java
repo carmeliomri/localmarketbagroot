@@ -47,8 +47,9 @@ public class CustomerActivity extends AppCompatActivity {
         dairyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,DairyActivity.class);
+                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
                 intent.putExtra("USERNAME",username);
+                intent.putExtra("CATEGORY","Dairy");
                 startActivity(intent);
             }
         });
@@ -56,8 +57,9 @@ public class CustomerActivity extends AppCompatActivity {
         fruitsAndVegtablesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,FruitsandVegetablesActivity.class);
+                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
                 intent.putExtra("USERNAME",username);
+                intent.putExtra("CATEGORY","FruitsVegetables");
                 startActivity(intent);
             }
         });
@@ -65,8 +67,9 @@ public class CustomerActivity extends AppCompatActivity {
         miscButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,MiscActivity.class);
+                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
                 intent.putExtra("USERNAME",username);
+                intent.putExtra("CATEGORY","Misc");
                 startActivity(intent);
             }
         });
@@ -74,8 +77,9 @@ public class CustomerActivity extends AppCompatActivity {
         sweetsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,SweetsActivity.class);
+                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
                 intent.putExtra("USERNAME",username);
+                intent.putExtra("CATEGORY","Sweets");
                 startActivity(intent);
             }
         });
