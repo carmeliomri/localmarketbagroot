@@ -4,12 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.util.List;
 
@@ -43,7 +46,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         // Load image using Glide
         Glide.with(context)
                 .load(imageUrls.get(position)) // Image URL or drawable resource
-               // .placeholder(R.drawable.placeholder) // Optional placeholder
+                .override(1000,150)
+                // .placeholder(R.drawable.placeholder) // Optional placeholder
                 .into(holder.imageView);
     }
 

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SellerActivity extends AppCompatActivity implements ImageAdapter.OnImageClickListener {
-    RecyclerView recyclerView;
+
     ImageAdapter imageAdapter;
     List<String> imageUrls;
 
@@ -38,40 +38,17 @@ public class SellerActivity extends AppCompatActivity implements ImageAdapter.On
 
         });
 
-        LinearLayout layout = findViewById(R.id.linear_Layout);
-        Button newBtn = new Button(this);
-        newBtn.setText("New Button");
-        layout.addView(newBtn);
-        newBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(SellerActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-        // recyclerView = findViewById(R.id.recyclerView);
 
-// Set up how the list should look (e.g., vertically).
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-// Create some data for the list.
-      //  List<String> items = new ArrayList<>();
-       // items.add("Item 1");
-        //items.add("Item 2");
-        //items.add("Item 3");
-        //items.add("Item 4");
-
-// Set the adapter to the RecyclerView.
-        //MyAdapter adapter = new MyAdapter(items);
-        //recyclerView.setAdapter(adapter);
 
         // Initialize RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewPic);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Dummy list of image URLs (replace with real URLs or resources)
         imageUrls = new ArrayList<>();
-        imageUrls.add("https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_square.jpg?wp=1&w=136&h=136");
-        imageUrls.add("https://pettownsendvet.com/wp-content/uploads/2023/01/iStock-1052880600.jpg");
+        imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczP2oJGP7tGn6_070_wvyRdAYqVAXqELzz83m8CL35TJfDaCSJi8tLLlm4flxNvbRSmaMIov7LNMgODnAXAYtXoQ7hVvSol-pi1yQmQkjVKy-CDXhubbvnDNblis32x0DWOBeBqoBVWI6CMGEUr5nnIiIA=w500-h100-s-no-gm?authuser=0");
+        imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczOkUaGB-Kj4DnyrKBWeU6lICSTVDn2rw1YqQxwpvykmAnM68xA1dyolBkgTPkW5ZzqIdS1_dWlhEB-_5apE26ySQHOSwOV7h80oqrR9GMiKVTAw3bbvONJVp7rsHHNMbB3aIPl2ntM79F1n9P9SU2N-bw=w966-h1288-s-no-gm?authuser=0");
+        imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczOKa7FIaAc7JKq3z6XlUeShgle1FJSzL1PM-y-eSXMvFgv6ip238HMULEt61_OXQkjvHqxzAiiv9-Hd27ZY2HVv9osPke_4h8WxXswG7v1lkHk8xgzQdRAFM9AsiZNkPKTDj8kx6Qe7R8KZ_lqm01DCCw=w955-h1271-s-no-gm?authuser=0");
         imageUrls.add("https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=67773a9d419786091c958b2ad08eae5e");
 
         // Initialize Adapter with Click Listener
