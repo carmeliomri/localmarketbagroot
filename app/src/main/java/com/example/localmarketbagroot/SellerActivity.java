@@ -46,8 +46,7 @@ public class SellerActivity extends AppCompatActivity implements ImageAdapter.On
 
         // Dummy list of image URLs (replace with real URLs or resources)
         imageUrls = new ArrayList<>();
-        imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczP2oJGP7tGn6_070_wvyRdAYqVAXqELzz83m8CL35TJfDaCSJi8tLLlm4flxNvbRSmaMIov7LNMgODnAXAYtXoQ7hVvSol-pi1yQmQkjVKy-CDXhubbvnDNblis32x0DWOBeBqoBVWI6CMGEUr5nnIiIA=w500-h100-s-no-gm?authuser=0");
-        imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczOkUaGB-Kj4DnyrKBWeU6lICSTVDn2rw1YqQxwpvykmAnM68xA1dyolBkgTPkW5ZzqIdS1_dWlhEB-_5apE26ySQHOSwOV7h80oqrR9GMiKVTAw3bbvONJVp7rsHHNMbB3aIPl2ntM79F1n9P9SU2N-bw=w966-h1288-s-no-gm?authuser=0");
+        imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczOTRqHPWfWUQQllGJtNzCDsUZRd_UvVxVUsn1VYMFlZtm75ug6iR4Zn28lkDGBZfl7n3-lkOqWjEM-bHgZgO4QekrV_7NYcHpVtHPQRSmVi2UNyZj92Kshf-7IhmV7C4qRH0ouQqye7Rb3Wl-qRWkJpvg=w3039-h456-s-no-gm?authuser=0");
         imageUrls.add("https://lh3.googleusercontent.com/pw/AP1GczOKa7FIaAc7JKq3z6XlUeShgle1FJSzL1PM-y-eSXMvFgv6ip238HMULEt61_OXQkjvHqxzAiiv9-Hd27ZY2HVv9osPke_4h8WxXswG7v1lkHk8xgzQdRAFM9AsiZNkPKTDj8kx6Qe7R8KZ_lqm01DCCw=w955-h1271-s-no-gm?authuser=0");
         imageUrls.add("https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=67773a9d419786091c958b2ad08eae5e");
 
