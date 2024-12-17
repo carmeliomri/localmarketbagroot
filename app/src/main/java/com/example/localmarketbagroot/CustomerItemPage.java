@@ -1,7 +1,12 @@
 package com.example.localmarketbagroot;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +29,8 @@ public class CustomerItemPage extends AppCompatActivity {
             return insets;
         });
         ImageView imageView = findViewById(R.id.imageViewItem);
+        Intent intent = this.getIntent();
+
 
         // Use Glide to load the image into the ImageView
         Glide.with(this)
@@ -31,6 +38,22 @@ public class CustomerItemPage extends AppCompatActivity {
                 //.placeholder(R.drawable.placeholder) // Optional placeholder while loading
                 //.error(R.drawable.error_image) // Optional error image if loading fails
                 .into(imageView);
-
+        Button addToCart = findViewById(R.id.addToCartButton);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView textView = findViewById(R.id.ammountText);
+                String amount = textView.getText().toString();
+                MyApp app = (MyApp) getApplicationContext();
+                try {
+                    app.setAmmount(intent.getExtras().getString("URL"), Integer.parseInt(amount));//put into map
+                    Toast.makeText(CustomerItemPage.this, "added "+amount+" to cart",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(CustomerItemPage.this,PurchaseActivity.class);
+                    startActivity(intent);
+                } catch(Exception e){
+                    Toast.makeText(CustomerItemPage.this, "Amount must be a number!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
