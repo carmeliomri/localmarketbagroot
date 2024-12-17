@@ -46,10 +46,10 @@ public class CustomerItemPage extends AppCompatActivity {
                 String amount = textView.getText().toString();
                 MyApp app = (MyApp) getApplicationContext();
                 try {
-                    app.setAmmount(intent.getExtras().getString("URL"), Integer.parseInt(amount));//put into map
+                    app.setAmmount(intent.getExtras().getString("URL"), amount);//put into map
                     Toast.makeText(CustomerItemPage.this, "added "+amount+" to cart",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(CustomerItemPage.this,PurchaseActivity.class);
-                    startActivity(intent);
+                    Intent intent2 = new Intent(CustomerItemPage.this,CustomerActivity.class);
+                    startActivity(intent2);
                 } catch(Exception e){
                     Toast.makeText(CustomerItemPage.this, "Amount must be a number!", Toast.LENGTH_SHORT).show();
                 }

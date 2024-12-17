@@ -83,6 +83,15 @@ public class CustomerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button cartButton = findViewById(R.id.cartButton);
+        cartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerActivity.this,ViewCart.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+        });
     }
 
 

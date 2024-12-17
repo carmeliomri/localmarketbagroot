@@ -14,6 +14,9 @@
         android:theme="@style/Theme.LocalMarketBagroot"
         tools:targetApi="31">
         <activity
+            android:name=".ViewCart"
+            android:exported="false" />
+        <activity
             android:name=".CustomerItemPage"
             android:exported="false" />
         <activity
