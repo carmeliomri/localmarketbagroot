@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+    //id ("com.android.application")
+   // id ("com.google.gms.google-services")
 }
 
 android {
@@ -33,7 +35,7 @@ android {
 }
 
 dependencies {
-
+    implementation ("com.google.firebase:firebase-database:21.0.0") // Latest version
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

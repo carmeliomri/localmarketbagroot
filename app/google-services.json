@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "3877781934",
+    "firebase_url": "https://local-market-bagroot-default-rtdb.firebaseio.com",
     "project_id": "local-market-bagroot",
     "storage_bucket": "local-market-bagroot.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.localmarketbagroot"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "3877781934-u77uemrptij5p6i3lto66auleenucr0m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.localmarketbagroot",
+            "certificate_hash": "3c42f1899a03c31e1c92722216c10862500fdb70"
+          }
+        },
+        {
+          "client_id": "3877781934-1p3v0qv7f64h9nnsjb8h5b10ek3id2g4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBuY8RZAAsSgk_sOQm7CyCWfEA5iFBnK5s"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3877781934-1p3v0qv7f64h9nnsjb8h5b10ek3id2g4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -2,20 +2,17 @@ package com.example.localmarketbagroot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,6 +29,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient googleSignInClient;
     ShapeableImageView imageView;
     TextView name, mail;
+    private DatabaseReference databaseReference;
+
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
         public void onActivityResult(ActivityResult result) {
@@ -91,6 +95,65 @@ public class MainActivity extends AppCompatActivity {
                    activityResultLauncher.launch(intent);
             }
         });
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        //fillDatabase();
+
+
+//        databaseReference.child("users").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    SellerDB sellerDB = snapshot.getValue(SellerDB.class);
+//                    Log.d("FirebaseData", "SellerDB: " + sellerDB.getFirstName());
+//                    Toast.makeText(MainActivity.this, "First name: "+ sellerDB.getFirstName(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Log.e("FirebaseData", "Error: " + databaseError.getMessage());
+//            }
+//        });
+
+
 
     }
+    protected void fillDatabase()
+    {
+        //build sellers table
+        databaseReference.child("sellers").push().setValue(new SellerDB("Omri", "Carmeli", "carmeli.omri@gmail.com"))
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        databaseReference.child("sellers").push().setValue(new SellerDB("Lando", "Norris", "lando.norris@gmail.com"))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        //build the products table
+        databaseReference.child("products").push().setValue(new ProductDB("Milk Chocolate", "Sweets", "https://lh3.googleusercontent.com/pw/AP1GczNMzQkM29JjvVvlql8cUmwk_CQqLO73OBflrq4pv-poeLyaXCHLcFXj2tHZvL3SjGVZnY-gH4cBzLvMSR0u1v4hDlSQoJej5Wcvm_41Ra5Y1rMXFjslPz1_IKBm9oW05rFnrwnFS-zeN5wrFutxnGjBSg=w3039-h456-s-no-gm?authuser=0", 10))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        databaseReference.child("products").push().setValue(new ProductDB("Milk", "Dairy", "https://lh3.googleusercontent.com/pw/AP1GczPOduqQn7yeoYc7kkYnudrgQPj65kCd-wuYPPb4c0TxZ6mvf_p6TIOAA9sDKYM3DuRaF0MsEnHPK0bXfZ--9u19jdA2pJkONSPTe7dxytE6DcColcnY0aVyxvjO9z9QHbIUpSwu84FqDjRINUvwKiZBXg=w3039-h456-s-no-gm?authuser=0", 5))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 }
