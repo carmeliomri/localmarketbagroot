@@ -67,6 +67,7 @@ public class SellerActivity extends AppCompatActivity implements ImageAdapter.On
                     imageUrls.add(product.getUrl());
                     Log.e("Edwa", "************** got url*********: " + product.getUrl());
                 }
+                recyclerView.setAdapter(imageAdapter);
             }
 
             @Override
@@ -78,7 +79,6 @@ public class SellerActivity extends AppCompatActivity implements ImageAdapter.On
 
         // Initialize Adapter with Click Listener
         imageAdapter = new ImageAdapter(this, imageUrls, this);
-        recyclerView.setAdapter(imageAdapter);
         Log.e("dwasdw", "added image urls");
     }
     @Override
