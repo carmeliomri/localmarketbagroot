@@ -57,13 +57,35 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 auth = FirebaseAuth.getInstance();
+                                String email = auth.getCurrentUser().getEmail();
                                 Glide.with(MainActivity.this).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(imageView);
                                 name.setText(auth.getCurrentUser().getDisplayName());
                                 mail.setText(auth.getCurrentUser().getEmail());
                                 Toast.makeText(MainActivity.this, "Signed In Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(MainActivity.this,CustomerActivity.class);
-                                intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
-                                startActivity(intent);
+                                databaseReference = FirebaseDatabase.getInstance().getReference("sellers");
+                                databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.getChildrenCount()== 0)
+                                        {
+                                            //regular customer
+                                            Intent intent = new Intent(MainActivity.this,CustomerActivity.class);
+                                            intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
+                                            startActivity(intent);
+                                        }
+                                        else {
+                                            //seller
+                                            Intent intent = new Intent(MainActivity.this,SellerActivity.class);
+                                            intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
+                                            startActivity(intent);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Log.e("FirebaseData", "Error: " + databaseError.getMessage());
+                                    }
+                                });
                             } else {
                                 Toast.makeText(MainActivity.this, "Failed to sign in: "+ task.getException(), Toast.LENGTH_SHORT).show();
                             }

@@ -34,15 +34,6 @@ public class CustomerActivity extends AppCompatActivity {
             return insets;
 
         });
-        Button button2 = findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,SellerActivity.class);
-                intent.putExtra("USERNAME",username);
-                startActivity(intent);
-            }
-        });
 
         Button dairyButton = findViewById(R.id.dairy);
         dairyButton.setOnClickListener(new View.OnClickListener() {
