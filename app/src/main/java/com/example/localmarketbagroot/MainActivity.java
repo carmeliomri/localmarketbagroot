@@ -176,6 +176,30 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
                     }
                 });
+        databaseReference.child("products").push().setValue(new ProductDB("Carrots", "Vegetables", "https://lh3.googleusercontent.com/pw/AP1GczOP9IAsrlHBV5Wknm4OuCcJeJuP7yOfL3VcyQiCP86sl13YlOh0g4hh8TT643FksvIk8DY7wQnAt1hUWxW_qt9nfXGEJhbf2PuIY56_QlaNoqaRykamZo_WWyyHyALYK9mSr7OBd8HWwFXxFTTJrAb6xQ=w1319-h198-s-no-gm?authuser=0", 20))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        databaseReference.child("products").push().setValue(new ProductDB("Choclate Chips Cookies", "Sweets", "https://lh3.googleusercontent.com/pw/AP1GczOnTap2zVWD-Wgav7kKm-rYjGk6eZWHQLn7MIHFAvkr0xAybAfBlLoNPJxlsqPz6OWBf51Z6znKFPOVSp1FXEmpLeZhD-uU3ZZDcvUk4uBrOvrgnRkaqRXzgSNknrunKwkfTorjm9PZMEp0SBwbRSTRFg=w1319-h198-s-no-gm?authuser=0", 30))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        databaseReference.child("products").push().setValue(new ProductDB("Broom", "Misc", "https://lh3.googleusercontent.com/pw/AP1GczOTRqHPWfWUQQllGJtNzCDsUZRd_UvVxVUsn1VYMFlZtm75ug6iR4Zn28lkDGBZfl7n3-lkOqWjEM-bHgZgO4QekrV_7NYcHpVtHPQRSmVi2UNyZj92Kshf-7IhmV7C4qRH0ouQqye7Rb3Wl-qRWkJpvg=w1319-h198-s-no-gm?authuser=0", 12))
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Data added successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Failed to add data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 }

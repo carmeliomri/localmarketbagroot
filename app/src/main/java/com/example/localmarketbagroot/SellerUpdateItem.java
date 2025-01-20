@@ -37,7 +37,7 @@ public class SellerUpdateItem extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            Toast.makeText(SellerUpdateItem.this, this.getIntent().getExtras().getInt("POSITION")+ "*******" +this.getIntent().getExtras().getString("URL"), Toast.LENGTH_SHORT).show();
+            // Toast.makeText(SellerUpdateItem.this, this.getIntent().getExtras().getInt("POSITION")+ "*******" +this.getIntent().getExtras().getString("URL"), Toast.LENGTH_SHORT).show();
             // Reference to the ImageView
             ImageView imageView = findViewById(R.id.imageView);
             url = this.getIntent().getExtras().getString("URL");
