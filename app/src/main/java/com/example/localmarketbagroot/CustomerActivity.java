@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -35,46 +36,7 @@ public class CustomerActivity extends AppCompatActivity {
 
         });
 
-        Button dairyButton = findViewById(R.id.dairy);
-        dairyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
-                intent.putExtra("USERNAME",username);
-                intent.putExtra("CATEGORY","Dairy");
-                startActivity(intent);
-            }
-        });
-        Button fruitsAndVegtablesButton = findViewById(R.id.fruitsandvegetables);
-        fruitsAndVegtablesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
-                intent.putExtra("USERNAME",username);
-                intent.putExtra("CATEGORY","FruitsVegetables");
-                startActivity(intent);
-            }
-        });
-        Button miscButton = findViewById(R.id.misc);
-        miscButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
-                intent.putExtra("USERNAME",username);
-                intent.putExtra("CATEGORY","Misc");
-                startActivity(intent);
-            }
-        });
-        Button sweetsButton = findViewById(R.id.sweets);
-        sweetsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CustomerActivity.this,PurchaseActivity.class);
-                intent.putExtra("USERNAME",username);
-                intent.putExtra("CATEGORY","Sweets");
-                startActivity(intent);
-            }
-        });
+
         Button cartButton = findViewById(R.id.cartButton);
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +56,35 @@ public class CustomerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        ImageButton vegImgButton = findViewById(R.id.fruitsandvegetablesImage);
+        vegImgButton.setOnClickListener(view -> {
+            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
+            intent2.putExtra("USERNAME",username);
+            intent2.putExtra("CATEGORY","FruitsVegetables");
+            startActivity(intent2);
+        });
+        ImageButton dairyImgButton = findViewById(R.id.dairyImage);
+        dairyImgButton.setOnClickListener(view -> {
+            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
+            intent2.putExtra("USERNAME",username);
+            intent2.putExtra("CATEGORY","Dairy");
+            startActivity(intent2);
+        });
+        ImageButton sweetsImgButton = findViewById(R.id.sweetsImage);
+        sweetsImgButton.setOnClickListener(view -> {
+            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
+            intent2.putExtra("USERNAME",username);
+            intent2.putExtra("CATEGORY","Sweets");
+            startActivity(intent2);
+        });
+        ImageButton miscImgButton = findViewById(R.id.miscImage);
+        miscImgButton.setOnClickListener(view -> {
+            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
+            intent2.putExtra("USERNAME",username);
+            intent2.putExtra("CATEGORY","Misc");
+            startActivity(intent2);
+        });
+
     }
 
 
