@@ -84,6 +84,16 @@ public class CustomerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button signoutButton = findViewById(R.id.signoutButton);
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(CustomerActivity.this, "Signed Out Successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(CustomerActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
