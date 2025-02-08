@@ -71,7 +71,9 @@ public class CustomerItemPage extends AppCompatActivity {
                 try {
                     app.setAmmount(intent.getExtras().getString("URL"), amount);//put into map
                     Toast.makeText(CustomerItemPage.this, "added "+amount+" to cart",Toast.LENGTH_SHORT).show();
+                    String username = intent.getStringExtra("USERNAME");
                     Intent intent2 = new Intent(CustomerItemPage.this,CustomerActivity.class);
+                    intent2.putExtra("USERNAME",username);
                     startActivity(intent2);
                 } catch(Exception e){
                     Toast.makeText(CustomerItemPage.this, "Amount must be a number!", Toast.LENGTH_SHORT).show();

@@ -87,10 +87,13 @@ public class PurchaseActivity extends AppCompatActivity implements ItemsImageAda
 
     @Override
     public void onImageClick(int position) {
+        Intent intent1 = this.getIntent();
+        String username = intent1.getStringExtra("USERNAME");
         String imageUrl = imageUrls.get(position);
         Intent intent = new Intent(PurchaseActivity.this,CustomerItemPage.class);
         intent.putExtra("URL",imageUrl);
         intent.putExtra("POSITION",position);
+        intent.putExtra("USERNAME",username);
         startActivity(intent);
 
         // Example: Navigate to another activity or perform any action
