@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.901" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/fruitsandvegetablesImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -57,7 +57,7 @@
         app:layout_constraintVertical_bias="0.406"
         app:srcCompat="@drawable/vegtables" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/dairyImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.406"
         app:srcCompat="@drawable/dairy" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/sweetsImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -81,7 +81,7 @@
         app:layout_constraintVertical_bias="0.783"
         app:srcCompat="@drawable/sweets" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/miscImage"
         android:layout_width="200dp"
         android:layout_height="200dp"

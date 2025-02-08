@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -66,37 +67,49 @@ public class CustomerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        ImageButton vegImgButton = findViewById(R.id.fruitsandvegetablesImage);
-        vegImgButton.setOnClickListener(view -> {
-            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
-            intent2.putExtra("USERNAME",username);
-            intent2.putExtra("CATEGORY","FruitsVegetables");
-            startActivity(intent2);
+        ImageView vegImgButton =(ImageView) findViewById(R.id.fruitsandvegetablesImage);
+        vegImgButton.setClickable(true);
+        vegImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
+                intent2.putExtra("USERNAME", username);
+                intent2.putExtra("CATEGORY", "FruitsVegetables");
+                startActivity(intent2);
+            }
         });
-        ImageButton dairyImgButton = findViewById(R.id.dairyImage);
-        dairyImgButton.setOnClickListener(view -> {
-            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
-            intent2.putExtra("USERNAME",username);
-            intent2.putExtra("CATEGORY","Dairy");
-            startActivity(intent2);
+        ImageView dairyImgButton =(ImageView) findViewById(R.id.dairyImage);
+        dairyImgButton.setClickable(true);
+        dairyImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
+                intent2.putExtra("USERNAME", username);
+                intent2.putExtra("CATEGORY", "Dairy");
+                startActivity(intent2);
+            }
         });
-        ImageButton sweetsImgButton = findViewById(R.id.sweetsImage);
-        sweetsImgButton.setOnClickListener(view -> {
-            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
-            intent2.putExtra("USERNAME",username);
-            intent2.putExtra("CATEGORY","Sweets");
-            startActivity(intent2);
+        ImageView sweetsImgButton =(ImageView) findViewById(R.id.sweetsImage);
+        sweetsImgButton.setClickable(true);
+        sweetsImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
+                intent2.putExtra("USERNAME", username);
+                intent2.putExtra("CATEGORY", "Sweets");
+                startActivity(intent2);
+            }
         });
-        ImageButton miscImgButton = findViewById(R.id.miscImage);
-        miscImgButton.setOnClickListener(view -> {
-            Intent intent2 = new Intent(CustomerActivity.this,PurchaseActivity.class);
-            intent2.putExtra("USERNAME",username);
-            intent2.putExtra("CATEGORY","Misc");
-            startActivity(intent2);
+        ImageView miscImgButton =(ImageView) findViewById(R.id.miscImage);
+        miscImgButton.setClickable(true);
+        miscImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
+                intent2.putExtra("USERNAME", username);
+                intent2.putExtra("CATEGORY", "Misc");
+                startActivity(intent2);
+            }
         });
-
     }
-
-
-
 }
