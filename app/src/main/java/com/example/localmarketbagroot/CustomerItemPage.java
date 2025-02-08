@@ -47,6 +47,8 @@ public class CustomerItemPage extends AppCompatActivity {
                     ProductDB product = snapshot.getValue(ProductDB.class);
                     TextView textView = findViewById(R.id.itemPriceText);
                     textView.setText(String.valueOf(product.getPrice()));
+                    TextView textView2 = findViewById(R.id.itemNameText);
+                    textView2.setText(product.getName());
                 }
             }
 
@@ -66,10 +68,12 @@ public class CustomerItemPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 TextView textView = findViewById(R.id.ammountText);
-                String amount = textView.getText().toString();
+                int amount = Integer.parseInt(textView.getText().toString());
+                TextView textView2 = findViewById(R.id.itemNameText);
+                String itemName = textView2.getText().toString();
                 MyApp app = (MyApp) getApplicationContext();
                 try {
-                    app.setAmmount(intent.getExtras().getString("URL"), amount);//put into map
+                    app.setAmount(intent.getExtras().getString("URL"), itemName, amount);//put into map
                     Toast.makeText(CustomerItemPage.this, "added "+amount+" to cart",Toast.LENGTH_SHORT).show();
                     String username = intent.getStringExtra("USERNAME");
                     Intent intent2 = new Intent(CustomerItemPage.this,CustomerActivity.class);

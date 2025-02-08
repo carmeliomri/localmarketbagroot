@@ -6,32 +6,38 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+class CartItem {
+    public int amount;
+    public String itemName;
+
+}
 public class MyApp extends Application {
-    private HashMap<String, String> cart;
+    private HashMap<String, CartItem> cart;
 
     @Override
     public void onCreate() {
         super.onCreate();
         // Initialize your variables
-        cart = new HashMap<String, String>();
+        cart = new HashMap<String, CartItem>();
     }
-    public HashMap<String, String> getCart(){
-        Log.e("sws","**************************size: "+ cart.size());
+    public HashMap<String, CartItem> getCart(){
         return cart;
     }
 
-    public String getAmmount(String URL) {
-        String ammount = cart.get(URL);
-        if (ammount == null)
+    public int getAmount(String URL) {
+        CartItem item = cart.get(URL);
+        if (item == null)
         {
-            return "0";
+            return 0;
         }
-        return ammount;
+        return item.amount;
     }
 
-    public void setAmmount(String URL, String ammount) {
-        cart.put(URL,ammount);
-        Log.e("sws","**************************size: "+ cart.size());
+    public void setAmount(String URL, String itemName, int amount) {
+        CartItem item = new CartItem();
+        item.amount = amount;
+        item.itemName = itemName;
+        cart.put(URL,item);
     }
 }
 

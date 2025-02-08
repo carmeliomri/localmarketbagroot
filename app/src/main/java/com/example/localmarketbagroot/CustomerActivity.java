@@ -16,6 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class CustomerActivity extends AppCompatActivity {
@@ -41,6 +44,13 @@ public class CustomerActivity extends AppCompatActivity {
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MyApp app = (MyApp) getApplicationContext();
+                HashMap<String, CartItem> cart = app.getCart();
+                if (cart.isEmpty())
+                {
+                    Toast.makeText(CustomerActivity.this, "Cart is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(CustomerActivity.this,ViewCart.class);
                 intent.putExtra("USERNAME",username);
                 startActivity(intent);

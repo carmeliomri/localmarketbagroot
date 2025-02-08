@@ -48,19 +48,19 @@ public class ViewCart extends AppCompatActivity {
 // Iterate through HashMap
         MyApp app = (MyApp) getApplicationContext();
         List<CartDataModel> dataList = new ArrayList<>();
-        HashMap<String, String> cart = app.getCart();
-        for (Map.Entry<String, String> entry : cart.entrySet()) {
+        HashMap<String, CartItem> cart = app.getCart();
+        for (Map.Entry<String, CartItem> entry : cart.entrySet()) {
             String url = entry.getKey();
-            String amount = entry.getValue();
-            dataList.add(new CartDataModel(amount, url));
-
+            CartItem item = entry.getValue();
+            int amount = item.amount;
+            dataList.add(new CartDataModel(Integer.toString(amount), url));
             productsDatabase = FirebaseDatabase.getInstance().getReference("products");
             productsDatabase.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         ProductDB product = snapshot.getValue(ProductDB.class);
-                        totalPrice+= product.getPrice()*Integer.parseInt(amount);
+                        totalPrice+= product.getPrice()*amount;
                         TextView textView2 = findViewById(R.id.finalPriceText);
                         textView2.setText(String.valueOf(totalPrice));
                     }
@@ -83,12 +83,15 @@ public class ViewCart extends AppCompatActivity {
             public void onClick(View view) {
                 MyApp app = (MyApp) getApplicationContext();
                 List<CartDataModel> dataList = new ArrayList<>();
-                HashMap<String, String> cart = app.getCart();
-                for (Map.Entry<String, String> entry : cart.entrySet()) {
+                HashMap<String, CartItem> cart = app.getCart();
+                for (Map.Entry<String, CartItem> entry : cart.entrySet()) {
                     String url = entry.getKey();
-                    int amount = Integer.parseInt(entry.getValue());
-                    ordersDatabase.push().setValue(new OrderDB(username, url, amount));
+                    CartItem item = entry.getValue();
+                    int amount = item.amount;
+                    String name = item.itemName;
+                    ordersDatabase.push().setValue(new OrderDB(username, name, amount));
                 }
+                Toast.makeText(ViewCart.this, "Order Placed", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ViewCart.this, CustomerActivity.class);
                 startActivity(intent);
             }
