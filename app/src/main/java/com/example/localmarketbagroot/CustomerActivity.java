@@ -74,7 +74,7 @@ public class CustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
                 intent2.putExtra("USERNAME", username);
-                intent2.putExtra("CATEGORY", "FruitsVegetables");
+                intent2.putExtra("CATEGORY", "Vegetables");
                 startActivity(intent2);
             }
         });

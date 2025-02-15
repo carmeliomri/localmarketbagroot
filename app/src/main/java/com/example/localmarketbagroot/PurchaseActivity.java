@@ -52,13 +52,13 @@ public class PurchaseActivity extends AppCompatActivity implements ItemsImageAda
             ImageView imageView = findViewById(R.id.catTitleImage);
             imageView.setImageResource(R.drawable.misc);
         }
-        else if (category.equals("FruitsVegetables")) {
+        else if (category.equals("Vegetables")) {
             ImageView imageView = findViewById(R.id.catTitleImage);
             imageView.setImageResource(R.drawable.vegtables);
         }
         else if (category.equals("Sweets")) {
             ImageView imageView = findViewById(R.id.catTitleImage);
-            imageView.setImageResource(R.drawable.sweets);
+            imageView.setImageResource(R.drawable.candy);
         }
         RecyclerView recyclerView = findViewById(R.id.recyclerViewItemsPic);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
