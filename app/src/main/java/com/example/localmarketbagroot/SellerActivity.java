@@ -89,6 +89,8 @@ public class SellerActivity extends AppCompatActivity implements ImageAdapter.On
         });
 
 
+
+
     }
     @Override
     public void onImageClick(int position) {

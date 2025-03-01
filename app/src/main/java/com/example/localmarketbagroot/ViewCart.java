@@ -76,23 +76,12 @@ public class ViewCart extends AppCompatActivity {
 
         }
 
-        ordersDatabase = FirebaseDatabase.getInstance().getReference("orders");
         Button checkoutBtn = findViewById(R.id.checkoutBtn);
         checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyApp app = (MyApp) getApplicationContext();
-                List<CartDataModel> dataList = new ArrayList<>();
-                HashMap<String, CartItem> cart = app.getCart();
-                for (Map.Entry<String, CartItem> entry : cart.entrySet()) {
-                    String url = entry.getKey();
-                    CartItem item = entry.getValue();
-                    int amount = item.amount;
-                    String name = item.itemName;
-                    ordersDatabase.push().setValue(new OrderDB(username, name, amount));
-                }
-                Toast.makeText(ViewCart.this, "Order Placed", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ViewCart.this, CustomerActivity.class);
+                Intent intent = new Intent(ViewCart.this, DeliveryAddressMap.class);
+                intent.putExtra("USERNAME",username);
                 startActivity(intent);
             }
         });

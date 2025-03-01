@@ -4,13 +4,15 @@ public class OrderDB {
     private String customerName;
     private String itemName;
     private int amount;
+    private String address;
 
     public OrderDB() {
         // Default constructor required for calls to DataSnapshot.getValue(SellerDB.class)
     }
 
-    public OrderDB(String customerName, String itemName, int amount) {
+    public OrderDB(String customerName, String address, String itemName, int amount) {
         this.customerName = customerName;
+        this.address = address;
         this.itemName = itemName;
         this.amount = amount;
     }
@@ -38,5 +40,12 @@ public class OrderDB {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+    public String getAddress() {
+        return address;
+
+    }
+    public void setAddress (String address) {
+        this.address = address;
     }
 }
