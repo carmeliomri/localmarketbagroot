@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+//shows cart items and price
 public class ViewCart extends AppCompatActivity {
     private DatabaseReference productsDatabase;
     private DatabaseReference ordersDatabase;
@@ -38,37 +38,31 @@ public class ViewCart extends AppCompatActivity {
         setContentView(R.layout.activity_view_cart);
         Intent intent = getIntent();
         username = intent.getStringExtra("USERNAME");
-
-
-        // Initialize RecyclerView
         RecyclerView recyclerView = findViewById(R.id.cartRecyclerView);
-
-        // Create a list of DataModel objects
-
-// Iterate through HashMap
-        MyApp app = (MyApp) getApplicationContext();
+        // Iterate through HashMap
+        MyApp app = (MyApp) getApplicationContext();//get the application class (global)
         List<CartDataModel> dataList = new ArrayList<>();
-        HashMap<String, CartItem> cart = app.getCart();
-        for (Map.Entry<String, CartItem> entry : cart.entrySet()) {
+        HashMap<String, CartItem> cart = app.getCart();//get the cart from application class (global)
+        for (Map.Entry<String, CartItem> entry : cart.entrySet()) {//for every item on the cart
             String url = entry.getKey();
             CartItem item = entry.getValue();
             int amount = item.amount;
             dataList.add(new CartDataModel(Integer.toString(amount), url));
-            productsDatabase = FirebaseDatabase.getInstance().getReference("products");
+            productsDatabase = FirebaseDatabase.getInstance().getReference("products");//go to the products table of the DB and find the item
             productsDatabase.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {//add item's price to total price
                         ProductDB product = snapshot.getValue(ProductDB.class);
-                        totalPrice+= product.getPrice()*amount;
+                        totalPrice+= product.getPrice()*amount;//update total price
                         TextView textView2 = findViewById(R.id.finalPriceText);
-                        textView2.setText(String.valueOf(totalPrice));
+                        textView2.setText(String.valueOf(totalPrice));//show total price
                     }
                 }
 
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(DatabaseError databaseError) {//error
                     Log.e("FirebaseData", "Error: " + databaseError.getMessage());
                 }
 

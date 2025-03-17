@@ -37,67 +37,62 @@ public class SellerUpdateItem extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            // Toast.makeText(SellerUpdateItem.this, this.getIntent().getExtras().getInt("POSITION")+ "*******" +this.getIntent().getExtras().getString("URL"), Toast.LENGTH_SHORT).show();
-            // Reference to the ImageView
-            ImageView imageView = findViewById(R.id.imageView);
-            url = this.getIntent().getExtras().getString("URL");
+            ImageView imageView = findViewById(R.id.imageView);//image view to show the image
+            url = this.getIntent().getExtras().getString("URL");//show the image recieved from intent extra data from prev screen
 
-            // Use Glide to load the image into the ImageView
-            Glide.with(this)
-                    .load(url) // The image URL
-                    //.placeholder(R.drawable.placeholder) // Optional placeholder while loading
-                    //.error(R.drawable.error_image) // Optional error image if loading fails
+            Glide.with(this)//use glide to show the pic
+                    .load(url)
                     .into(imageView);
-            databaseReference = FirebaseDatabase.getInstance().getReference("products");
+            databaseReference = FirebaseDatabase.getInstance().getReference("products");//serach the item's URL in products table in the database in order to present the price and url
             databaseReference.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(DataSnapshot dataSnapshot) {//when database result returned
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         ProductDB product = snapshot.getValue(ProductDB.class);
-                        TextView textView = findViewById(R.id.priceText);
+                        TextView textView = findViewById(R.id.priceText);//show the price
                         textView.setText(String.valueOf(product.getPrice()));
-                        TextView textView2 = findViewById(R.id.imageURLtext);
+                        TextView textView2 = findViewById(R.id.imageURLtext);//show the url
                         textView2.setText(product.getUrl());
                     }
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(DatabaseError databaseError) {//error
                     Log.e("FirebaseData", "Error: " + databaseError.getMessage());
                 }
             });
             return insets;
         });
 
-        Button updateButton = findViewById(R.id.updateButton);
+        Button updateButton = findViewById(R.id.updateButton);//changed data, wants to update the DB
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView textView = findViewById(R.id.priceText);
-                TextView textView2 = findViewById(R.id.imageURLtext);
+                TextView textView = findViewById(R.id.priceText);//take new price
+                TextView textView2 = findViewById(R.id.imageURLtext);//take new URL
                 String newPrice = textView.getText().toString();
                 String newUrl = textView2.getText().toString();
-                Map<String, Object> updates = new HashMap<>();
-                updates.put("price",Integer.parseInt(newPrice));
-                updates.put("url",newUrl);
+                Map<String, Object> updates = new HashMap<>();//create a map to update the database (only map varibale can be updated)
+                updates.put("price",Integer.parseInt(newPrice));//change the price in the db
+                updates.put("url",newUrl);//change the url in the db
 
-                databaseReference = FirebaseDatabase.getInstance().getReference("products");
-                databaseReference.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {
+                databaseReference = FirebaseDatabase.getInstance().getReference("products");//go to products table in the database
+                databaseReference.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {//pull the record of the specifc product
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             ProductDB product = snapshot.getValue(ProductDB.class);
-                           snapshot.getRef().updateChildren(updates);
+                           snapshot.getRef().updateChildren(updates);//push the record of the specific product. actually updates the DB
 
                         }
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Log.e("FirebaseData", "Error: " + databaseError.getMessage());
+                        Log.e("FirebaseData", "Error: " + databaseError.getMessage());//error
                     }
                 });
-                Intent intent = new Intent(SellerUpdateItem.this, SellerActivity.class);
+                Intent intent = new Intent(SellerUpdateItem.this, SellerActivity.class);//after updated, send back to sellers home screen
                 startActivity(intent);
             }
         });

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//show map checkout screen
 
 public class DeliveryAddressMap extends AppCompatActivity implements OnMapReadyCallback {
     private DatabaseReference ordersDatabase;
@@ -59,19 +59,18 @@ public class DeliveryAddressMap extends AppCompatActivity implements OnMapReadyC
         showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView textView = findViewById(R.id.deliveryAddressText);
+                TextView textView = findViewById(R.id.deliveryAddressText);//take address user typed
                  mAddress = textView.getText().toString();
-                // Use Geocoder to convert the address to latitude and longitude
-                try {
-                    List<Address> addressList = mGeocoder.getFromLocationName(mAddress, 1);
-                    if (addressList != null && addressList.size() > 0) {
-                        Address location = addressList.get(0);
-                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                try {//try to convert adrdress to corodinates
+                    List<Address> addressList = mGeocoder.getFromLocationName(mAddress, 1);//actually try
+                    if (addressList != null && addressList.size() > 0) {//if successfully converted to cordinates
+                        Address location = addressList.get(0);//take the first option (0)
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());//actually convert to lat and long
 
                         // Add a marker on the map and move the camera
                         mMap.addMarker(new MarkerOptions().position(latLng).title("Marker at: " + mAddress));
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15)); // Zoom level 15
-                    } else {
+                    } else {//failed to convert the address to cordiantes. user error
                         Toast.makeText(DeliveryAddressMap.this, "Address not found", Toast.LENGTH_SHORT).show();
                     }
                 } catch (IOException e) {
@@ -86,20 +85,20 @@ public class DeliveryAddressMap extends AppCompatActivity implements OnMapReadyC
         Button submitOrderBtn = findViewById(R.id.submitOrderBtn);
         submitOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (mAddress == null) {
+            public void onClick(View view) {//when submit order
+                if (mAddress == null) {//no address entered, user error
                     Toast.makeText(DeliveryAddressMap.this, "Please enter an address", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                MyApp app = (MyApp) getApplicationContext();
+                MyApp app = (MyApp) getApplicationContext();//go to application class (global)
                 List<CartDataModel> dataList = new ArrayList<>();
-                HashMap<String, CartItem> cart = app.getCart();
-                for (Map.Entry<String, CartItem> entry : cart.entrySet()) {
+                HashMap<String, CartItem> cart = app.getCart();//get cart from application class (global)
+                for (Map.Entry<String, CartItem> entry : cart.entrySet()) {//for every item in cart
                     String url = entry.getKey();
                     CartItem item = entry.getValue();
                     int amount = item.amount;
                     String name = item.itemName;
-                    ordersDatabase.push().setValue(new OrderDB(username, mAddress, name, amount));
+                    ordersDatabase.push().setValue(new OrderDB(username, mAddress, name, amount));//push the username, address, item name and amount to the DB. ENTER FINAL ORDER TO DB
                 }
                 Toast.makeText(DeliveryAddressMap.this, "Order Placed", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DeliveryAddressMap.this, CustomerActivity.class);

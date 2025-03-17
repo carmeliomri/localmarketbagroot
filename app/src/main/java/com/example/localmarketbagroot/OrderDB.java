@@ -9,7 +9,7 @@ public class OrderDB {
     public OrderDB() {
         // Default constructor required for calls to DataSnapshot.getValue(SellerDB.class)
     }
-
+//define order table in database
     public OrderDB(String customerName, String address, String itemName, int amount) {
         this.customerName = customerName;
         this.address = address;

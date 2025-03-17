@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+//show the single item with price, url and image
 public class CustomerItemPage extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
@@ -39,44 +39,41 @@ public class CustomerItemPage extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.imageViewItem);
         Intent intent = this.getIntent();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("products");
-        databaseReference.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference("products");//go to the products table in DB
+        databaseReference.orderByChild("url").equalTo(url).addListenerForSingleValueEvent(new ValueEventListener() {//use url to query the item
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {//when query result returned
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     ProductDB product = snapshot.getValue(ProductDB.class);
-                    TextView textView = findViewById(R.id.itemPriceText);
+                    TextView textView = findViewById(R.id.itemPriceText);//show price from db
                     textView.setText(String.valueOf(product.getPrice()));
-                    TextView textView2 = findViewById(R.id.itemNameText);
+                    TextView textView2 = findViewById(R.id.itemNameText);//show item name from db
                     textView2.setText(product.getName());
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError) {//error
                 Log.e("FirebaseData", "Error: " + databaseError.getMessage());
             }
         });
-        // Use Glide to load the image into the ImageView
         Glide.with(this)
-                .load(url) // Replace with the actual image URL)) // The image URL
-                //.placeholder(R.drawable.placeholder) // Optional placeholder while loading
-                //.error(R.drawable.error_image) // Optional error image if loading fails
+                .load(url) //show items image using glide and url
                 .into(imageView);
         Button addToCart = findViewById(R.id.addToCartButton);
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {//clicked on add to cart
                 TextView textView = findViewById(R.id.ammountText);
-                int amount = Integer.parseInt(textView.getText().toString());
-                TextView textView2 = findViewById(R.id.itemNameText);
+                int amount = Integer.parseInt(textView.getText().toString());//take amount from what user entered
+                TextView textView2 = findViewById(R.id.itemNameText);//take item name
                 String itemName = textView2.getText().toString();
-                MyApp app = (MyApp) getApplicationContext();
+                MyApp app = (MyApp) getApplicationContext();//send to cart (global) which is located in application class
                 try {
                     app.setAmount(intent.getExtras().getString("URL"), itemName, amount);//put into map
                     Toast.makeText(CustomerItemPage.this, "added "+amount+" to cart",Toast.LENGTH_SHORT).show();
                     String username = intent.getStringExtra("USERNAME");
-                    Intent intent2 = new Intent(CustomerItemPage.this,CustomerActivity.class);
+                    Intent intent2 = new Intent(CustomerItemPage.this,CustomerActivity.class);//after added send back to customer homepage
                     intent2.putExtra("USERNAME",username);
                     startActivity(intent2);
                 } catch(Exception e){

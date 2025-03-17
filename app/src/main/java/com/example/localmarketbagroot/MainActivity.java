@@ -38,56 +38,56 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseAuth auth;
-    GoogleSignInClient googleSignInClient;
-    ShapeableImageView imageView;
-    TextView name, mail;
+    FirebaseAuth auth; //database
+    GoogleSignInClient googleSignInClient;//google sign in
+    ShapeableImageView imageView;//google profile image
+    TextView name, mail;//google name and email
     private DatabaseReference databaseReference;
 
     private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
         @Override
-        public void onActivityResult(ActivityResult result) {
-            if(result.getResultCode() == RESULT_OK) {
+        public void onActivityResult(ActivityResult result) { //happens when user clicked on sign in, not yet failed/successful
+            if(result.getResultCode() == RESULT_OK) { //if sign in successful
                 Task<GoogleSignInAccount> accountTask = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
                 try {
                     GoogleSignInAccount signInAccount = accountTask.getResult(ApiException.class);
                     AuthCredential authCredential = GoogleAuthProvider.getCredential(signInAccount.getIdToken(), null);
-                    auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    auth.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {//actually sign in with google services. send credentials to google services.
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                        public void onComplete(@NonNull Task<AuthResult> task) {//happens when sign in is done
                             if(task.isSuccessful()) {
-                                auth = FirebaseAuth.getInstance();
+                                auth = FirebaseAuth.getInstance(); //go to database and check if user is seller or customer
                                 String email = auth.getCurrentUser().getEmail();
                                 Glide.with(MainActivity.this).load(Objects.requireNonNull(auth.getCurrentUser()).getPhotoUrl()).into(imageView);
                                 name.setText(auth.getCurrentUser().getDisplayName());
                                 mail.setText(auth.getCurrentUser().getEmail());
                                 Toast.makeText(MainActivity.this, "Signed In Successfully", Toast.LENGTH_SHORT).show();
-                                databaseReference = FirebaseDatabase.getInstance().getReference("sellers");
-                                databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                databaseReference = FirebaseDatabase.getInstance().getReference("sellers");//search the sellers table for users email
+                                databaseReference.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {//searching
                                     @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.getChildrenCount()== 0)
+                                    public void onDataChange(DataSnapshot dataSnapshot) {//when database result returned (user/customer
+                                        if (dataSnapshot.getChildrenCount()== 0)//if result is empty, --> customer
                                         {
                                             //regular customer
                                             Intent intent = new Intent(MainActivity.this,CustomerActivity.class);
-                                            intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
+                                            intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());//grabs username from sign in credentials to the intent's extra data.
                                             startActivity(intent);
                                         }
-                                        else {
+                                        else { //if result is not empty, --> seller
                                             //seller
                                             Intent intent = new Intent(MainActivity.this,SellerActivity.class);
-                                            intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());
+                                            intent.putExtra("USERNAME",auth.getCurrentUser().getDisplayName());//grabs username from sign in credentials to the intent's extra data.
                                             startActivity(intent);
                                         }
                                     }
 
                                     @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                    public void onCancelled(DatabaseError databaseError) {//when user canceled sign in
                                         Log.e("FirebaseData", "Error: " + databaseError.getMessage());
                                     }
                                 });
                             } else {
-                                Toast.makeText(MainActivity.this, "Failed to sign in: "+ task.getException(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Failed to sign in: "+ task.getException(), Toast.LENGTH_SHORT).show();//if not successfull login (entred weong pass..) show error
                             }
                         }
                     });
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     });
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//login created, first function
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseApp.initializeApp(this);
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.nameTV);
         mail = findViewById(R.id.mailTV);
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.client_id)).requestEmail().build();
-        googleSignInClient = GoogleSignIn.getClient(MainActivity.this, options);
+        googleSignInClient = GoogleSignIn.getClient(MainActivity.this, options);//google sign in
         auth = FirebaseAuth.getInstance();
         SignInButton signInButton = findViewById(R.id.signIn);
         signInButton.setOnClickListener (new View.OnClickListener() {
@@ -118,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        //fillDatabase();
+        //fillDatabase();//fill database when empty. for personal use.
     }
-    protected void fillDatabase()
+    protected void fillDatabase()//fill database with data, personal use
     {
         //build sellers table
         databaseReference.child("sellers").push().setValue(new SellerDB("Omri", "Carmeli", "carmeli.omri@gmail.com"))

@@ -5,6 +5,7 @@ public class ProductDB {
     private String category;
     private String url;
     private int price;
+    //define products table in database
     public ProductDB() {
         // Default constructor required for calls to DataSnapshot.getValue(ProductDB.class)
     }

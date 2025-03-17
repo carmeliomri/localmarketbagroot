@@ -6,13 +6,13 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
-class CartItem {
+class CartItem {//define cart item
     public int amount;
     public String itemName;
 
 }
-public class MyApp extends Application {
-    private HashMap<String, CartItem> cart;
+public class MyApp extends Application {//create application class (global) that inherits from application (android class) in order to put a private variable of cart
+    private HashMap<String, CartItem> cart;//private variable of cart (global). take url, give amount and name (cart item class)
 
     @Override
     public void onCreate() {

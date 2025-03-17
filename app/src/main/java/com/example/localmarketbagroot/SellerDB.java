@@ -4,6 +4,7 @@ public class SellerDB {
     private String firstName;
     private String lastName;
     private String email;
+    //define seller table in database
 
     public SellerDB() {
         // Default constructor required for calls to DataSnapshot.getValue(SellerDB.class)

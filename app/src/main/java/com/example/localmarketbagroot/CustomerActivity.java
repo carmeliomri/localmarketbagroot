@@ -31,7 +31,6 @@ public class CustomerActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_customer);
         Intent intent = getIntent();
-        // Extract data from the intent
         username = intent.getStringExtra("USERNAME");
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -41,12 +40,12 @@ public class CustomerActivity extends AppCompatActivity {
         });
 
 
-        Button cartButton = findViewById(R.id.cartButton);
+        Button cartButton = findViewById(R.id.cartButton);//show cart btn
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyApp app = (MyApp) getApplicationContext();
-                HashMap<String, CartItem> cart = app.getCart();
+                HashMap<String, CartItem> cart = app.getCart();//get cart from application class (global)
                 if (cart.isEmpty())
                 {
                     Toast.makeText(CustomerActivity.this, "Cart is empty", Toast.LENGTH_SHORT).show();
@@ -57,24 +56,24 @@ public class CustomerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button signoutButton = findViewById(R.id.signoutButton);
+        Button signoutButton = findViewById(R.id.signoutButton);//signout
         signoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
+                FirebaseAuth.getInstance().signOut();//*
                 Toast.makeText(CustomerActivity.this, "Signed Out Successfully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CustomerActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
-        ImageView vegImgButton =(ImageView) findViewById(R.id.fruitsandvegetablesImage);
+        ImageView vegImgButton =(ImageView) findViewById(R.id.fruitsandvegetablesImage);//clicked on vegetables
         vegImgButton.setClickable(true);
         vegImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
                 intent2.putExtra("USERNAME", username);
-                intent2.putExtra("CATEGORY", "Vegetables");
+                intent2.putExtra("CATEGORY", "Vegetables");//set CATEGORY to intents extra data, in order to show the CAT's items on next screen
                 startActivity(intent2);
             }
         });
@@ -85,7 +84,7 @@ public class CustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
                 intent2.putExtra("USERNAME", username);
-                intent2.putExtra("CATEGORY", "Dairy");
+                intent2.putExtra("CATEGORY", "Dairy");//set CATEGORY to intents extra data, in order to show the CAT's items on next screen
                 startActivity(intent2);
             }
         });
@@ -96,7 +95,7 @@ public class CustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
                 intent2.putExtra("USERNAME", username);
-                intent2.putExtra("CATEGORY", "Sweets");
+                intent2.putExtra("CATEGORY", "Sweets");//set CATEGORY to intents extra data, in order to show the CAT's items on next screen
                 startActivity(intent2);
             }
         });
@@ -107,7 +106,7 @@ public class CustomerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent2 = new Intent(CustomerActivity.this, PurchaseActivity.class);
                 intent2.putExtra("USERNAME", username);
-                intent2.putExtra("CATEGORY", "Misc");
+                intent2.putExtra("CATEGORY", "Misc");//set CATEGORY to intents extra data, in order to show the CAT's items on next screen
                 startActivity(intent2);
             }
         });

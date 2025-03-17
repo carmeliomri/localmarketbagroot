@@ -1,5 +1,5 @@
 package com.example.localmarketbagroot;
-
+//basic defenition of cart item
 public class CartDataModel {
     private final String text;
     private final String imageUrl; // Use String for URL
